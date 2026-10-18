@@ -11,7 +11,7 @@ jobs:
   unittest:
     strategy:
       matrix:
-        ref: [cf0ccb4ae5cf560373cac2e5025ad496fcf9b2fa, 96581740ba3ef0547753fd6eefeb94f5ddb22c26]
+        ref: [68abfca947c147bef992f5f9796e77060ee5befe]
     runs-on: ubuntu-latest
     # Omarchy is Arch: bin/omdrop needs pacman's vercmp, and the receiver needs
     # python-libarchive-c.
