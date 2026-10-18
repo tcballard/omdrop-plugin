@@ -1,15 +1,17 @@
-name: Tests
+name: PR 39 validation
 
 on:
   push:
-    branches: [main]
-  pull_request:
+    branches: [ci/receiver-peer-disconnect]
 
 permissions:
   contents: read
 
 jobs:
   unittest:
+    strategy:
+      matrix:
+        ref: [cf0ccb4ae5cf560373cac2e5025ad496fcf9b2fa, 96581740ba3ef0547753fd6eefeb94f5ddb22c26]
     runs-on: ubuntu-latest
     # Omarchy is Arch: bin/omdrop needs pacman's vercmp, and the receiver needs
     # python-libarchive-c.
@@ -18,6 +20,8 @@ jobs:
       - name: Install dependencies
         run: pacman -Syu --noconfirm --needed git python openssl python-libarchive-c
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ matrix.ref }}
       - name: Run tests as a regular user
         # identity.py refuses to create a self-signed identity as root.
         run: |
